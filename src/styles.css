@@ -1,0 +1,294 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * HAKIM TRAVELS design system.
+ * Colors derived from the official logo: deep blue, ocean blue, turquoise,
+ * leaf green, sun yellow, warm white, deep navy.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 12px);
+  --radius-md: calc(var(--radius) - 8px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-navy: var(--navy);
+  --color-ocean: var(--ocean);
+  --color-turquoise: var(--turquoise);
+  --color-leaf: var(--leaf);
+  --color-sun: var(--sun);
+  --color-sand: var(--sand);
+  --color-mist: var(--mist);
+
+  --shadow-soft: 0 1px 2px oklch(0.3 0.08 250 / 0.04), 0 12px 32px -16px oklch(0.3 0.08 250 / 0.18);
+  --shadow-lift: 0 2px 4px oklch(0.3 0.08 250 / 0.05), 0 28px 60px -28px oklch(0.3 0.08 250 / 0.28);
+}
+
+:root {
+  --radius: 1.5rem; /* 24px cards */
+
+  /* #FAFAF7 */
+  --background: oklch(0.983 0.004 106);
+  /* #062B4F */
+  --foreground: oklch(0.271 0.062 250.5);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.271 0.062 250.5);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.271 0.062 250.5);
+  /* #0754A5 */
+  --primary: oklch(0.454 0.144 254.8);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.965 0.012 210);
+  --secondary-foreground: oklch(0.271 0.062 250.5);
+  /* #F2FAFA */
+  --muted: oklch(0.977 0.011 197);
+  /* #6B7280 */
+  --muted-foreground: oklch(0.551 0.023 264.4);
+  /* #18A7A6 */
+  --accent: oklch(0.653 0.104 191.5);
+  --accent-foreground: oklch(0.99 0.005 250);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0.005 250);
+  --border: oklch(0.915 0.011 235);
+  --input: oklch(0.915 0.011 235);
+  --ring: oklch(0.454 0.144 254.8);
+
+  --navy: oklch(0.271 0.062 250.5);
+  /* #0B78B8 */
+  --ocean: oklch(0.567 0.128 240.5);
+  --turquoise: oklch(0.653 0.104 191.5);
+  /* #0A8F2C */
+  --leaf: oklch(0.552 0.164 145.5);
+  /* #F5D900 */
+  --sun: oklch(0.888 0.185 100.5);
+  --sand: oklch(0.983 0.004 106);
+  --mist: oklch(0.977 0.011 197);
+}
+
+/*
+ * Polices : hors du bloc `inline` pour que les utilitaires `font-sans` / `font-display`
+ * lisent la variable, que `html[lang="ar"]` remplace ensuite (polices arabes chargées en AR seulement).
+ */
+@theme {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+html[lang="ar"] {
+  --font-display: "Noto Kufi Arabic", "Tajawal", "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Tajawal", "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* L'espacement entre lettres et les majuscules cassent la liaison des lettres arabes. */
+html[lang="ar"] body,
+html[lang="ar"] body * {
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+html[lang="ar"] .display-hero,
+html[lang="ar"] .display-section {
+  line-height: 1.3;
+}
+
+html[lang="ar"] body {
+  line-height: 1.75;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--turquoise);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 5rem;
+
+  @media (min-width: 768px) {
+    padding-block: 7.5rem;
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--turquoise);
+}
+
+@utility display-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 6.4vw, 5.5rem);
+}
+
+@utility display-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  font-size: clamp(1.95rem, 4vw, 3.4rem);
+}
+
+@utility card-surface {
+  background: var(--card);
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility media-zoom {
+  & img {
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover img {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ht-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ht-ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes ht-ring {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ht-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ht-wave {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 260;
+  }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ht-leaf {
+  from {
+    opacity: 0;
+    transform: translateY(6px) rotate(-8deg) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ht-ken-burns {
+  animation: ht-ken-burns 22s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

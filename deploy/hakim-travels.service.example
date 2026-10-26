@@ -1,0 +1,28 @@
+# Service systemd (Linux). À copier dans /etc/systemd/system/hakim-travels.service puis :
+#   sudo systemctl daemon-reload && sudo systemctl enable --now hakim-travels
+#   journalctl -u hakim-travels -f
+#
+# Rappel : un SEUL processus (SQLite). Ne pas multiplier les instances.
+
+[Unit]
+Description=Hakim Travels (site et back-office)
+After=network.target
+
+[Service]
+Type=simple
+User=hakim
+Group=hakim
+WorkingDirectory=/srv/hakim-travels
+# Le fichier .env du projet est lu par node (--env-file-if-exists), exactement comme `npm start`.
+ExecStart=/usr/bin/node --env-file-if-exists=.env --disable-warning=ExperimentalWarning .output/server/index.mjs
+Environment=NODE_ENV=production
+Restart=on-failure
+RestartSec=5
+
+# Durcissement léger : seul le dossier data/ est inscriptible.
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/srv/hakim-travels/data
+
+[Install]
+WantedBy=multi-user.target

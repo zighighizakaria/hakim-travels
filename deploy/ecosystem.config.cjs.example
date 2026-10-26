@@ -1,0 +1,20 @@
+// pm2 : `pm2 start deploy/ecosystem.config.cjs.example` (copiez-le en ecosystem.config.cjs à la racine si besoin),
+// puis `pm2 save` et `pm2 startup` pour le redémarrage automatique.
+//
+// UNE SEULE INSTANCE, en mode fork. Ne mettez jamais `instances: "max"` ni `exec_mode: "cluster"` :
+// SQLite, la limitation des tentatives de connexion et le singleton de base vivent dans la mémoire du processus.
+module.exports = {
+  apps: [
+    {
+      name: "hakim-travels",
+      cwd: "/srv/hakim-travels",
+      script: ".output/server/index.mjs",
+      node_args: "--env-file-if-exists=.env --disable-warning=ExperimentalWarning",
+      instances: 1,
+      exec_mode: "fork",
+      autorestart: true,
+      max_memory_restart: "512M",
+      env: { NODE_ENV: "production" },
+    },
+  ],
+};
